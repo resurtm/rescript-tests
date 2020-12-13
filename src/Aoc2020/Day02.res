@@ -58,9 +58,28 @@ let checkPasswords = (passwords: array<item>) => {
         ->length
 }
 
-("Day 02, Part 01:")->Js.log
-("./input/aoc2020/day02.txt")
+let checkPasswordsPt2 = (passwords: array<item>) => {
+    passwords
+        ->map(password => {
+            password.data->Js.String.charAt(password.min - 1, _) == password.letter &&
+            password.data->Js.String.charAt(password.max - 1, _) != password.letter ||
+            password.data->Js.String.charAt(password.max - 1, _) == password.letter &&
+            password.data->Js.String.charAt(password.min - 1, _) != password.letter
+        })
+        ->keep(x => x)
+        ->length
+}
+
+let data = ("./input/aoc2020/day02.txt")
     ->Tools.readLinesInputData
     ->parseData
+
+("Day 02, Part 01:")->Js.log
+data
     ->checkPasswords
+    ->Js.log
+
+("Day 02, Part 01:")->Js.log
+data
+    ->checkPasswordsPt2
     ->Js.log

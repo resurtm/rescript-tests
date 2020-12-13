@@ -61,11 +61,41 @@ function checkPasswords(passwords) {
               })).length;
 }
 
+function checkPasswordsPt2(passwords) {
+  return Belt_Array.keep(Belt_Array.map(passwords, (function (password) {
+                    var tmp = false;
+                    var __x = password.data;
+                    if (__x.charAt(password.min - 1 | 0) === password.letter) {
+                      var __x$1 = password.data;
+                      tmp = __x$1.charAt(password.max - 1 | 0) !== password.letter;
+                    }
+                    if (tmp) {
+                      return true;
+                    }
+                    var __x$2 = password.data;
+                    if (__x$2.charAt(password.max - 1 | 0) !== password.letter) {
+                      return false;
+                    }
+                    var __x$3 = password.data;
+                    return __x$3.charAt(password.min - 1 | 0) !== password.letter;
+                  })), (function (x) {
+                return x;
+              })).length;
+}
+
+var data = parseData(Tools.readLinesInputData("./input/aoc2020/day02.txt"));
+
 console.log("Day 02, Part 01:");
 
-console.log(checkPasswords(parseData(Tools.readLinesInputData("./input/aoc2020/day02.txt"))));
+console.log(checkPasswords(data));
+
+console.log("Day 02, Part 01:");
+
+console.log(checkPasswordsPt2(data));
 
 exports.fromString = fromString;
 exports.parseData = parseData;
 exports.checkPasswords = checkPasswords;
-/*  Not a pure module */
+exports.checkPasswordsPt2 = checkPasswordsPt2;
+exports.data = data;
+/* data Not a pure module */
